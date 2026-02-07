@@ -5,13 +5,15 @@ from db import get_db
 from repositories.User_repo import UserRepo
 from schemas.User_schemas import UserSchema
 
+
 router = APIRouter()
 
 
 @router.post("/signup")
-def signup(user:User,db: Session = Depends(get_db)):
-        user_repo=UserRepo(db)   
-        user_repo.add_user()
+def signup(user: UserSchema, db: Session = Depends(get_db)):
+        user_repo = UserRepo(db)
+        new_user = User(email=user.email, password=user.password)
+        user_repo.add_user(new_user)
         return {"message": "User created successfully"}
 
 @router.post("/login")
