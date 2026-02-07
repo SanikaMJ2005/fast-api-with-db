@@ -10,7 +10,7 @@ router = APIRouter()
 
 @router.post("/signup")
 def signup(user: UserSchema, db: Session = Depends(get_db)):
-        
+
     user_repo = UserRepo(db)
     # Convert Pydantic schema to SQLAlchemy model
     db_user = User(email=user.email, password=user.password)
@@ -19,4 +19,4 @@ def signup(user: UserSchema, db: Session = Depends(get_db)):
 
 @router.post("/login")
 def login():
-    return {"message": "User logged in successfully"}from fastapi import APIRouter
+    return {"message": "User logged in successfully"}
